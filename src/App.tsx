@@ -1,25 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import Button from './components/Button'
+import { memoActions } from './store/memo/memo.actions';
+import { memoSelectors } from './store/memo/memo.selectors';
 
 function App() {
+  const toggleHide = () => {
+    dispatch(memoActions.increment());
+    dispatch(memoActions.shafle());
+  }
+
+  // const current = useSelector(memoSelectors.selectCurrent);
+  const values = useSelector(memoSelectors.selectValues);
+  const dispatch = useDispatch();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {values.map((value, index) => {
+        return <div key={index}>
+          {value.map((v, vi) => <Button value={v} key={vi} hide={false} onClick={value => console.log(value)} />)}
+        </div>
+      })}
+
+      <button onClick={toggleHide}>toggle</button>
+    </>
   );
 }
 

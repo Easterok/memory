@@ -1,0 +1,22 @@
+.button {
+    width: 64px;
+    height: 64px;
+    box-sizing: border-box;
+
+    border: 2px solid rgba(0, 0, 0, 0.9);
+    border-radius: 4px;
+
+    font-size: 36px;
+
+    color: #fafafa;
+}
+
+.button_empty {
+    border-color: transparent;
+    color: transparent;
+}
+
+.button_hide {
+    background-color: #fafafa;
+    border-color: transparent;
+}
