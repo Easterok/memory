@@ -1,4 +1,3 @@
-"*.{ts, tsx}": [
-    "prettier --write",
-    "git add"
+"*.{ts, tsx, js, md, json}": [
+    "prettier --write"
 ]
