@@ -1,6 +1,6 @@
-import { Action } from "@reduxjs/toolkit";
-import { memoActions } from "./memo.actions";
-import { MemoState } from "./memo.state";
+import {Action} from '@reduxjs/toolkit';
+import {memoActions} from './memo.actions';
+import {MemoState} from './memo.state';
 
 const nums = new Array(5 * 5).fill('').map((_, i) => i + 1);
 
@@ -14,7 +14,7 @@ function shafle(elem: number): number[][] {
         array[j] = temp;
     }
 
-    const dict: Record<string, number> = {}
+    const dict: Record<string, number> = {};
 
     for (let i = 0; i < elem; i++) {
         const index = array.pop();
@@ -42,10 +42,13 @@ function shafle(elem: number): number[][] {
 const initialState: MemoState = {
     current: 5,
     values: shafle(5),
-}
+};
 
-export const memoReducer = (state: MemoState | undefined = initialState, action: Action): MemoState => {
-    switch(action.type) {
+export const memoReducer = (
+    state: MemoState | undefined = initialState,
+    action: Action,
+): MemoState => {
+    switch (action.type) {
         case memoActions.increment.type:
             return {...state, current: state.current + 1};
         case memoActions.reset.type:
@@ -55,4 +58,4 @@ export const memoReducer = (state: MemoState | undefined = initialState, action:
         default:
             return state;
     }
-}
+};

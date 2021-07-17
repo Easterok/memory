@@ -1,4 +1,4 @@
-import { createAction } from "../../utils/create-action";
+import {createAction} from '../../utils/create-action';
 
 const increment = createAction('[Memo] Increment');
 
@@ -10,4 +10,4 @@ export const memoActions = {
     increment,
     reset,
     shafle,
-}
+};

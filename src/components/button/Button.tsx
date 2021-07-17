@@ -1,11 +1,11 @@
-import { classList } from '../../utils/class-list';
+import {classList} from '../../utils/class-list';
 import './Button.css';
 
 type Props = {
-    value: number
-    onClick?: (value: number) => void
-    hide: boolean
-}
+    value: number;
+    onClick?: (value: number) => void;
+    hide: boolean;
+};
 
 function Button(props: Props) {
     const onClickHandler = () => {
@@ -14,17 +14,21 @@ function Button(props: Props) {
         }
 
         if (props.onClick) {
-            props.onClick(props.value)
+            props.onClick(props.value);
         }
-    }
+    };
 
     const classes = classList({
-        'button': true,
-        'button_hide': props.hide,
-        'button_empty': props.value === 0
-    })
+        button: true,
+        button_hide: props.hide,
+        button_empty: props.value === 0,
+    });
 
-    return <button className={classes} type="button" onClick={onClickHandler}>{props.value}</button>
+    return (
+        <button className={classes} type="button" onClick={onClickHandler}>
+            {props.value}
+        </button>
+    );
 }
 
-export default Button
+export default Button;
