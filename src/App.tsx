@@ -13,6 +13,7 @@ function App() {
     const current = useSelector(memoSelectors.selectCurrent);
     const values = useSelector(memoSelectors.selectValues);
 
+
     const dispatch = useDispatch();
 
     return (
