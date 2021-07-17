@@ -10,9 +10,10 @@ function App() {
         dispatch(memoActions.shafle());
     };
 
-    const current = useSelector(memoSelectors.selectCurrent)
-    const values = useSelector(memoSelectors.selectValues)
-    const dispatch = useDispatch()
+    const current = useSelector(memoSelectors.selectCurrent);
+    const values = useSelector(memoSelectors.selectValues);
+
+    const dispatch = useDispatch();
 
     return (
         <>
