@@ -22,7 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "precommit": "lint-staged"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +44,9 @@
     ]
   },
   "devDependencies": {
-    "@types/react-redux": "^7.1.18"
+    "@types/react-redux": "^7.1.18",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.1",
+    "prettier": "^2.3.2"
   }
 }

@@ -1,4 +1,4 @@
-import { classList } from '../utils/class-list';
+import { classList } from '../../utils/class-list';
 import './Button.css';
 
 type Props = {

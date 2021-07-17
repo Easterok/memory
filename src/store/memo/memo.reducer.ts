@@ -40,8 +40,8 @@ function shafle(elem: number): number[][] {
 }
 
 const initialState: MemoState = {
-    current: 3,
-    values: shafle(25),
+    current: 5,
+    values: shafle(5),
 }
 
 export const memoReducer = (state: MemoState | undefined = initialState, action: Action): MemoState => {
