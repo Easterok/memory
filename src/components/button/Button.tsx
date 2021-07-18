@@ -5,14 +5,15 @@ type Props = {
     value: number;
     onClick?: (value: number) => void;
     hide: boolean;
+    isCovered: boolean;
 };
 
 function Button(props: Props) {
-    const onClickHandler = () => {
-        if (props.value === 0) {
-            return;
-        }
+    if (props.hide || props.value === 0) {
+        return <div className="button"></div>;
+    }
 
+    const onClickHandler = () => {
         if (props.onClick) {
             props.onClick(props.value);
         }
@@ -20,13 +21,13 @@ function Button(props: Props) {
 
     const classes = classList({
         button: true,
-        button_hide: props.hide,
-        button_empty: props.value === 0,
+        button_colorized: true,
+        button_covered: props.value !== 0 && props.isCovered,
     });
 
     return (
         <button className={classes} type="button" onClick={onClickHandler}>
-            {props.value}
+            {props.isCovered ? '' : props.value || ''}
         </button>
     );
 }

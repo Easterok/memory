@@ -1,4 +1,5 @@
 import {Action} from '@reduxjs/toolkit';
+import {GameStatus} from '../../enums/game-status';
 import {memoActions} from './memo.actions';
 import {MemoState} from './memo.state';
 
@@ -39,10 +40,77 @@ function shafle(elem: number): number[][] {
     return result;
 }
 
+function checkIsCorrectChoice(value: number, prevSelected: number[]): boolean {
+    const prevElem = prevSelected[prevSelected.length - 1] || 0;
+
+    return value === prevElem + 1;
+}
+
 const initialState: MemoState = {
-    current: 5,
-    values: shafle(5),
+    current: 3,
+    values: shafle(3),
+    status: GameStatus.Pending,
+    mistakes: 0,
+    selected: [],
 };
+
+function incrementReducer(state: MemoState): MemoState {
+    return {
+        ...state,
+        current: state.current + 1,
+    };
+}
+
+function resetReducer(state: MemoState): MemoState {
+    return {
+        ...state,
+        current: 1,
+    };
+}
+
+function shafleReducer(state: MemoState): MemoState {
+    return {
+        ...state,
+        values: shafle(state.current),
+    };
+}
+
+function startReducer(state: MemoState): MemoState {
+    return {
+        ...state,
+        status: GameStatus.InProgress,
+    };
+}
+
+function selectReducer(
+    state: MemoState,
+    {payload}: ReturnType<typeof memoActions.select>,
+): MemoState {
+    const isCorrect = checkIsCorrectChoice(payload, state.selected);
+    const isOkStatus = state.status === GameStatus.InProgress;
+
+    if (!isCorrect || !isOkStatus) {
+        return {
+            ...state,
+            mistakes: state.mistakes + 1,
+            status: GameStatus.Mistake,
+            selected: [],
+        };
+    }
+
+    if (state.selected.length === state.current - 1 && state.current === payload) {
+        return {
+            ...state,
+            status: GameStatus.Success,
+            selected: [],
+        };
+    }
+
+    return {
+        ...state,
+        selected: [...state.selected, payload],
+    };
+}
 
 export const memoReducer = (
     state: MemoState | undefined = initialState,
@@ -50,11 +118,15 @@ export const memoReducer = (
 ): MemoState => {
     switch (action.type) {
         case memoActions.increment.type:
-            return {...state, current: state.current + 1};
+            return incrementReducer(state);
         case memoActions.reset.type:
-            return {...state, current: 1};
+            return resetReducer(state);
         case memoActions.shafle.type:
-            return {...state, values: shafle(state.current)};
+            return shafleReducer(state);
+        case memoActions.start.type:
+            return startReducer(state);
+        case memoActions.select.type:
+            return selectReducer(state, action as any);
         default:
             return state;
     }
